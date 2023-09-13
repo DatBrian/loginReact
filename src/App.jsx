@@ -3,6 +3,7 @@ import HomeView from "./views/HomeView";
 import LoginView from "./views/LoginView";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import DashboardView from "./views/DashboardView";
 
 function App (){
     return(
@@ -13,6 +14,7 @@ function App (){
                     <Route path="signin" element={<SignIn/>} />
                     <Route path="signup" element={<SignUp />} />
                 </Route>
+                <Route path="/dashboard" element={<DashboardView/>}></Route>
             </Routes>
         </BrowserRouter>
     )

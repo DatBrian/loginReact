@@ -7,7 +7,7 @@ export default function SignUp() {
     const [user, setUser] = useState({
         username: "",
         password: "",
-        role: [],
+        roles: [],
         permisos: {},
     });
 
@@ -25,9 +25,35 @@ export default function SignUp() {
         });
     };
 
-    const handleSubmitRegister = (e) => {
+    const handleRoleChange = (e) => {
+        const roleName = e.target.value;
+        const isChecked = e.target.checked;
+
+        const updatedRoles = isChecked
+        ? [...user.roles, roleName]
+        : user.roles.filter((role) => role !== roleName);
+
+        setUser({
+            ...user,
+            roles: updatedRoles,
+        });
+    };
+
+    const handleSubmitRegister = async(e) => {
         e.preventDefault();
-        alert(`Enviando!! user: ${user.username}, password: ${user.password}`);
+
+        const res = await fetch("http://localhost:5000/api/login/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "Application/json",
+                Accept: "Application/json",
+                "Accept-Version": "1.0.0"
+            },
+            body: JSON.stringify(user)
+        });
+        const response = await res.json();
+
+        console.log(response);
     };
 
     const handleQuit = () => {
@@ -46,11 +72,23 @@ export default function SignUp() {
                     Password:{" "}
                     <input type="password" onChange={handlePassword}></input>
                 </label>
+                <h2>Selecciona tus roles</h2>
+                <label>
+                    Usuario
+                    <input type="checkbox" value={"user"} checked={user.roles.includes("user")} onChange={handleRoleChange} />
+                </label>
+                <label>
+                    Administrador
+                    <input type="checkbox" value={"admin"} checked={user.roles.includes("admin")} onChange={handleRoleChange}/>
+                </label>
+
+                <br></br>
+                <br></br>
 
                 <button type="submit">Registrar</button>
 
                 <h1>Volver</h1>
-                <button type="button" onClick={handleQuit}>D:</button>
+                <button type="button" onClick={handleQuit} >D:</button>
             </form>
         </>
     );

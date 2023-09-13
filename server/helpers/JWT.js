@@ -18,7 +18,7 @@ const crearToken = async (req, res, next) => {
         const usuario = await conexionDB.collection("user").findOne({"user": user});
 
         if (!usuario) {
-            return res.status(401).send({ message: `El usuario ${usuario} no fue encontrado` });
+            return res.status(401).send({ message: `El usuario ${user} no fue encontrado` });
         }
 
 

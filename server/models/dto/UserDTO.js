@@ -6,7 +6,7 @@ export const UserDTO = [
 
     check("password").notEmpty().withMessage("El campo password es obligatorio"),
 
-    check("role").notEmpty().withMessage("Ingrese al menos un rol donde [1] es admin y [2] es usuario"),
+    check("roles").notEmpty().withMessage("Ingrese al menos un rol"),
 
     check("permisos").notEmpty().withMessage("Ingresar al menos un permiso de la siguiente manera: /ruta:[version]")
 ]

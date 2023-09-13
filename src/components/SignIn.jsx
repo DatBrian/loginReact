@@ -23,23 +23,36 @@ export default function SignIn() {
         });
     };
 
+    const redirectSucessfully = () => {
+        navigate("/dashboard");
+    }
+
     const handleSignin = async (e) => {
         e.preventDefault();
         const res = await fetch("http://localhost:5000/api/login/signin", {
             method: "POST",
             headers: {
                 "Content-Type": "Application/json",
-                Accept: "Application/json"
+                Accept: "Application/json",
+                "Accept-version": "1.0.0"
             },
             body: JSON.stringify(user)
         });
         const response = await res.json();
         console.log(response);
+        if (res.ok) {
+            console.log("res ok", res);
+        }
+        res.ok ? redirectSucessfully() : alert(response)
     }
 
     const handleQuit = () => {
         navigate("/login");
     };
+
+    const log = () => {
+        alert("log");
+    }
 
     return (
         <>
