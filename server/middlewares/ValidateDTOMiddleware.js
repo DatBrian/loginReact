@@ -20,8 +20,6 @@ class ValidateDTOMiddleware {
             updatedBody[properties[i]] = body[i];
         }
 
-        console.log(updatedBody);
-
         return updatedBody;
     }
 

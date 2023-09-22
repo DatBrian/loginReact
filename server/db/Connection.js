@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
-dotenv.config();
+import { loadEnv } from "vite";
+const env = loadEnv("development", process.cwd(), 'DB');
 
 class Connection {
     constructor() {
@@ -8,13 +8,13 @@ class Connection {
     }
 
     getUri() {
-        return `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.${process.env.DB_IDENTIFIER}.mongodb.net/?retryWrites=true&w=majority`;
+        return `mongodb+srv://${env.DB_USER}:${env.DB_PASSWORD}@${env.DB_CLUSTER}.${env.DB_IDENTIFIER}.mongodb.net/?retryWrites=true&w=majority`;
     }
 
     async connect() {
         try {
             await this.client.connect();
-            this.db = this.client.db(process.env.DB_NAME);
+            this.db = this.client.db(env.DB_NAME);
         } catch (error) {
             console.error("Error al conectar con la base de datos:", error);
             throw error;

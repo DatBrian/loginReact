@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
@@ -29,7 +29,7 @@ export default function SignIn() {
 
     const handleSignin = async (e) => {
         e.preventDefault();
-        const res = await fetch("http://localhost:5000/api/login/signin", {
+        const res = await fetch(`http://${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}/api/login/signin`, {
             method: "POST",
             headers: {
                 "Content-Type": "Application/json",
@@ -40,19 +40,12 @@ export default function SignIn() {
         });
         const response = await res.json();
         console.log(response);
-        if (res.ok) {
-            console.log("res ok", res);
-        }
         res.ok ? redirectSucessfully() : alert(response)
     }
 
     const handleQuit = () => {
         navigate("/login");
     };
-
-    const log = () => {
-        alert("log");
-    }
 
     return (
         <>

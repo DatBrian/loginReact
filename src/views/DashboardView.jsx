@@ -5,7 +5,7 @@ export default function DashboardView() {
     return (
         <>
             <h1>
-                Jose es un M
+                Bienvenido :D
             </h1>
         </>
     )

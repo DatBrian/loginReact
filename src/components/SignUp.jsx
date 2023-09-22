@@ -42,7 +42,7 @@ export default function SignUp() {
     const handleSubmitRegister = async(e) => {
         e.preventDefault();
 
-        const res = await fetch("http://localhost:5000/api/login/signup", {
+        const res = await fetch(`http://${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}/api/login/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "Application/json",
@@ -52,12 +52,15 @@ export default function SignUp() {
             body: JSON.stringify(user)
         });
         const response = await res.json();
-
-        console.log(response);
+        alert("Revisa la consola :DD")
+        console.log(await response);
+        if (response.status === 200) {
+            await handleQuit();
+        }
     };
 
-    const handleQuit = () => {
-        navigate("/login");
+    const handleQuit = async() => {
+        navigate("/Dashboard");
     };
 
     return (
