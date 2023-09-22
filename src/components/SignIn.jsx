@@ -39,8 +39,15 @@ export default function SignIn() {
             body: JSON.stringify(user)
         });
         const response = await res.json();
-        console.log(response);
-        res.ok ? redirectSucessfully() : alert(response)
+        if (res.ok) {
+            redirectSucessfully();
+        } else {
+            if (await response.message === "Contraseña incorrecta") {
+                alert("Contraseña incorrecta")
+            } else {
+                alert(response)
+            }
+        }
     }
 
     const handleQuit = () => {
